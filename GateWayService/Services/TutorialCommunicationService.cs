@@ -48,5 +48,34 @@ namespace GateWayService.Services
             var response = await _client.DeleteAsync($"api/Course/{id}");
             return response.IsSuccessStatusCode;
         }
+        public async Task<IEnumerable<TopicDto>> GetAllTopicsAsync()
+        {
+            var response = await _client.GetAsync("api/Topics");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<IEnumerable<TopicDto>>();
+        }
+        public async Task<TopicDto> GetTopicByIdAsync(int id)
+        {
+            var response = await _client.GetAsync($"api/Topics/{id}");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<TopicDto>();
+        }
+        public async Task<TopicDto> CreateTopicAsync(TopicDto topic)
+        {
+            var response = await _client.PostAsJsonAsync("api/Topics", topic);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<TopicDto>();
+        }
+        public async Task<TopicDto> UpdateTopicAsync(int id, TopicDto topic)
+        {
+            var response = await _client.PutAsJsonAsync($"api/Topics/{id}", topic);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<TopicDto>();
+        }
+        public async Task<bool> DeleteTopicAsync(int id)
+        {
+            var response = await _client.DeleteAsync($"api/Topics/{id}");
+            return response.IsSuccessStatusCode;
+        }
     }
 }
