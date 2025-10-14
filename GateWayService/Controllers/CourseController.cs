@@ -1,36 +1,4 @@
-﻿//using GateWayService.Services.Interfaces;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-
-//namespace GateWayService.Controllers
-//{
-//    [Route("api/Course")]
-//    [ApiController]
-//    public class CourseController : ControllerBase
-//    {
-//        private readonly ITutorialCommunicationService _tutorialCommunicationService;
-
-//        public CourseController(ITutorialCommunicationService tutorialCommunicationService)
-//        {
-//            _tutorialCommunicationService = tutorialCommunicationService;
-//        }
-//        [HttpGet]
-//        public async Task<IActionResult> GetAllTutorials()
-//        {
-//            var tutorials = await _tutorialCommunicationService.GetAllAsync();
-//            return Ok(tutorials);
-//        }
-//        [HttpPost]
-//        public async Task<IActionResult> CreateCourse()
-//        {
-//            var courses =await _tutorialCommunicationService.Create();
-//            return Ok(courses);
-//        }
-
-//    }
-//}
-
-using GateWayService.Services.Interfaces;
+﻿using GateWayService.Services.Interfaces;
 using GateWayService.DTOs.Tutorial;
 using Microsoft.AspNetCore.Mvc;
 
