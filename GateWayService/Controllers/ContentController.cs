@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GateWayService.Controllers
 {
-    [Route("api/Content")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ContentController : ControllerBase
     {
@@ -14,12 +14,14 @@ namespace GateWayService.Controllers
         {
             _tutorialCommunicationService = tutorialCommunicationService;
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllContents()
         {
             var contents = await _tutorialCommunicationService.GetAllContentsAsync();
             return Ok(contents);
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetContentById(int id)
         {
@@ -28,18 +30,21 @@ namespace GateWayService.Controllers
                 return NotFound();
             return Ok(content);
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateContent(ContentDto content)
         {
             var createdContent = await _tutorialCommunicationService.CreateContentAsync(content);
             return Ok(createdContent);
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContent(int id, ContentDto content)
         {
             var updatedContent = await _tutorialCommunicationService.UpdateContentAsync(id, content);
             return Ok(updatedContent);
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteContent(int id)
         {

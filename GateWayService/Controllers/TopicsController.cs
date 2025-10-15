@@ -14,30 +14,35 @@ namespace GateWayService.Controllers
         {
             _tutorialCommunicationService = tutorialCommunicationService;
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllTopics()
         {
             var topics = await _tutorialCommunicationService.GetAllTopicsAsync();
             return Ok(topics);
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTopicById(int id)
         {
             var topic = await _tutorialCommunicationService.GetTopicByIdAsync(id);
             return Ok(topic);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(TopicDto topic)
         {
             var createdTopic = await _tutorialCommunicationService.CreateTopicAsync(topic);
             return Ok(createdTopic);
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, TopicDto topic)
         {
             var updatedTopic = await _tutorialCommunicationService.UpdateTopicAsync(id, topic);
             return Ok(updatedTopic);
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
