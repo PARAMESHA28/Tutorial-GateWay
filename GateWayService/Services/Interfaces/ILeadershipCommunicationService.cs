@@ -28,18 +28,18 @@ namespace GateWayService.Services.Interfaces
         Task<bool> DeleteParticipants(int id);
 
         //questions
-        Task<IEnumerable<QuestionsDto>> GetAllQuestionsAsync();
-        Task<QuestionsDto> GetQuestionByIdAsync(int questionId);
-        Task<QuestionsDto> CreateQuestionAsync(QuestionsDto question);
-        Task<QuestionsDto> UpdateQuestionAsync(QuestionsDto question);
-        Task<QuestionsDto> DeleteQuestionAsync(int questionId);
+        //Task<IEnumerable<QuestionsDto>> GetAllQuestionsAsync();
+        //Task<QuestionsDto> GetQuestionByIdAsync(int questionId);
+        //Task<QuestionsDto> CreateQuestionAsync(QuestionsDto question);
+        //Task<QuestionsDto> UpdateQuestionAsync(QuestionsDto question);
+        //Task<QuestionsDto> DeleteQuestionAsync(int questionId);
 
-        //response
-        Task<IEnumerable<ResponseDto>> GetAllResponse();
-        Task<ResponseDto> GetResponseById(int id);
-        Task<ResponseDto> CreateResponse(ResponseDto response);
-        Task<ResponseDto> UpdateResponse(ResponseDto response);
-        Task<ResponseDto> DeleteResponseById(int id);
+        ////response
+        //Task<IEnumerable<ResponseDto>> GetAllResponse();
+        //Task<ResponseDto> GetResponseById(int id);
+        //Task<ResponseDto> CreateResponse(ResponseDto response);
+        //Task<ResponseDto> UpdateResponse(ResponseDto response);
+        //Task<ResponseDto> DeleteResponseById(int id);
 
     }
 }

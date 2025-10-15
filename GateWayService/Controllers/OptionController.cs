@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GateWayService.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class OptionController : ControllerBase
     {
         private readonly ILeadershipCommunicationService _leadershipCommunicationService;
@@ -48,7 +50,7 @@ namespace GateWayService.Controllers
         {
             var deleteOption = await _leadershipCommunicationService.DeleteOptionAsync(id);
             if(deleteOption)
-                return NoContent();
+                return Ok($"ID {id} is deleted");
             return NotFound($"Options with ID {id} not found");
 
         }

@@ -41,7 +41,7 @@ namespace GateWayService.Services
         }
         public async Task<bool> DeleteAsync(int Id)
         {
-            var response = await _client.DeleteAsync($"api/v1/LeaderBoard{Id}");
+            var response = await _client.DeleteAsync($"api/v1/LeaderBoard/{Id}");
             return response.IsSuccessStatusCode;
         }
 

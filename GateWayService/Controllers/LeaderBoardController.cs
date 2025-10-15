@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GateWayService.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class LeaderBoardController : ControllerBase
     {
         private readonly ILeadershipCommunicationService _leadershipCommunicationService;
@@ -47,7 +49,7 @@ namespace GateWayService.Controllers
         {
             var leader = await _leadershipCommunicationService.DeleteAsync(id);
             if(leader)
-                return NoContent();
+                return Ok($"Id {id} deleted");
             return NotFound(leader);
         }
     }
