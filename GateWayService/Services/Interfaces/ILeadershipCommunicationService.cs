@@ -9,7 +9,6 @@ namespace GateWayService.Services.Interfaces
         Task<IEnumerable<LeaderBoardDto>> GetAllAsync();
         Task<LeaderBoardDto> GetByIdAsync(int Id);
         Task<LeaderBoardDto> CreateAsync(LeaderBoardDto leaderboard);
-
         Task<LeaderBoardDto> UpdateAsync(int id, LeaderBoardDto leaderboard);
         Task<bool> DeleteAsync(int Id);
 
@@ -28,18 +27,18 @@ namespace GateWayService.Services.Interfaces
         Task<bool> DeleteParticipants(int id);
 
         //questions
-        //Task<IEnumerable<QuestionsDto>> GetAllQuestionsAsync();
-        //Task<QuestionsDto> GetQuestionByIdAsync(int questionId);
-        //Task<QuestionsDto> CreateQuestionAsync(QuestionsDto question);
-        //Task<QuestionsDto> UpdateQuestionAsync(QuestionsDto question);
-        //Task<QuestionsDto> DeleteQuestionAsync(int questionId);
+        Task<IEnumerable<QuestionsDto>> GetAllQuestionsAsync();
+        Task<QuestionsDto> GetQuestionByIdAsync(int questionId);
+        Task<QuestionsDto> CreateQuestionAsync(QuestionsDto question);
+        Task<QuestionsDto> UpdateQuestionAsync(int id, QuestionsDto question);
+        Task<bool> DeleteQuestionAsync(int questionId);
 
-        ////response
-        //Task<IEnumerable<ResponseDto>> GetAllResponse();
-        //Task<ResponseDto> GetResponseById(int id);
-        //Task<ResponseDto> CreateResponse(ResponseDto response);
-        //Task<ResponseDto> UpdateResponse(ResponseDto response);
-        //Task<ResponseDto> DeleteResponseById(int id);
+        //response
+        Task<IEnumerable<ResponseDto>> GetAllResponse();
+        Task<ResponseDto> GetResponseById(int id);
+        Task<ResponseDto> CreateResponse(ResponseDto response);
+        Task<ResponseDto> UpdateResponse(int id, ResponseDto response);
+        Task<bool> DeleteResponseById(int id);
 
     }
 }
