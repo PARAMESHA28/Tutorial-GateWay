@@ -22,7 +22,7 @@ builder.Services.AddSignalR();
 // HttpClients for downstream microservices
 builder.Services.AddHttpClient<ITutorialCommunicationService, TutorialCommunicationService>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["Services:TutorialService"]);
+    client.BaseAddress = new Uri(builder.Configuration["Services:CourseServive"]);
 });
 
 builder.Services.AddHttpClient<ILeadershipCommunicationService, LeadershipCommunicationService>(client =>

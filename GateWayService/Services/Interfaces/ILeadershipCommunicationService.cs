@@ -40,5 +40,14 @@ namespace GateWayService.Services.Interfaces
         Task<ResponseDto> UpdateResponse(int id, ResponseDto response);
         Task<bool> DeleteResponseById(int id);
 
+        Task<IEnumerable<QuizDto>> GetAllQuizzesAsync();
+        Task<QuizDto> GetQuizByIdAsync(int id);
+        Task<QuizDto> CreateQuizAsync(QuizDto quiz);
+        Task<QuizDto> UpdateQuizAsync(int id, QuizDto quiz);
+        Task<bool> DeleteQuizAsync(int id);
+
+
+
+
     }
 }

@@ -53,7 +53,7 @@ namespace GateWayService.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var deleted = await _tutorialService.DeleteAsync(id);
-            if (!deleted)
+            if (deleted)
                 return NotFound();
 
             return NoContent();
