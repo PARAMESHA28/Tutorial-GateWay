@@ -12,7 +12,7 @@ namespace GateWayService.Services.Interfaces
         Task<bool> DeleteAsync(int id);
 
         //Topic
-        Task<IEnumerable<TopicDto>> GetAllTopicsAsync();
+        Task<IEnumerable<TopicDto>> GetAllTopicsAsync(int courseId);
         Task<TopicDto> GetTopicByIdAsync(int id);
         Task<TopicDto> CreateTopicAsync(TopicDto topic);
         Task<TopicDto> UpdateTopicAsync(int id, TopicDto topic);

@@ -1,5 +1,6 @@
 ﻿using GateWayService.DTOs.Tutorial;
 using GateWayService.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Json;
 
 namespace GateWayService.Services
@@ -18,64 +19,66 @@ namespace GateWayService.Services
         public async Task<IEnumerable<CourseDto>> GetAllAsync()
         {
             _logger.LogInformation("Fetching all courses from Tutorial Service." );
-            var response = await _client.GetAsync("api/v1/Course");
+            var response = await _client.GetAsync("api/v1/Courses");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<IEnumerable<CourseDto>>();
         }
 
         public async Task<CourseDto> GetByIdAsync(int id)
         {
-            var response = await _client.GetAsync($"api/v1/Course/{id}");
+            var response = await _client.GetAsync($"api/v1/Courses/{id}");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<CourseDto>();
         }
 
         public async Task<CourseDto> CreateAsync(CourseDto course)
         {
-            var response = await _client.PostAsJsonAsync("api/v1/Course", course);
+            var response = await _client.PostAsJsonAsync("api/v1/Courses", course);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<CourseDto>();
         }
 
         public async Task<CourseDto> UpdateAsync(int id, CourseDto course)
         {
-            var response = await _client.PutAsJsonAsync($"api/v1/Course/{id}", course);
+            var response = await _client.PutAsJsonAsync($"api/v1/Courses/{id}", course);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<CourseDto>();
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var response = await _client.DeleteAsync($"api/v1/Course/{id}");
+            var response = await _client.DeleteAsync($"api/v1/Courses/{id}");
             return response.IsSuccessStatusCode;
         }
-        public async Task<IEnumerable<TopicDto>> GetAllTopicsAsync()
+        public async Task<IEnumerable<TopicDto>> GetAllTopicsAsync([FromQuery] int courseId)
         {
-            var response = await _client.GetAsync("api/v1/Topics");
+            var response = await _client.GetAsync($"api/v1/Courses/{courseId}/topics");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<IEnumerable<TopicDto>>();
         }
         public async Task<TopicDto> GetTopicByIdAsync(int id)
         {
-            var response = await _client.GetAsync($"api/v1/Topics/{id}");
+            var response = await _client.GetAsync($"api/v1/Courses/topics/{id}");
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<TopicDto>();
+            var topics = await response.Content.ReadFromJsonAsync<List<TopicDto>>();
+            return topics?.FirstOrDefault(); // Return the first item or null
+
         }
         public async Task<TopicDto> CreateTopicAsync(TopicDto topic)
         {
-            var response = await _client.PostAsJsonAsync("api/v1/Topics", topic);
+            var response = await _client.PostAsJsonAsync("api/v1/Courses/topics", topic);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<TopicDto>();
         }
         public async Task<TopicDto> UpdateTopicAsync(int id, TopicDto topic)
         {
-            var response = await _client.PutAsJsonAsync($"api/v1/Topics/{id}", topic);
+            var response = await _client.PutAsJsonAsync($"api/v1/Courses/topics/{id}", topic);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<TopicDto>();
         }
         public async Task<bool> DeleteTopicAsync(int id)
         {
-            var response = await _client.DeleteAsync($"api/v1/Topics/{id}");
+            var response = await _client.DeleteAsync($"api/v1/Courses/topics/{id}");
             return response.IsSuccessStatusCode;
         }
         public async Task<IEnumerable<ContentDto>> GetAllContentsAsync()
