@@ -15,16 +15,13 @@ namespace GateWayService.Services
             _client = client;
             _logger = logger;
         }
-        public  async Task<IEnumerable<QuizDto>> GetAllQuizzesAsync()
-        //LeaderBoard
-        public async Task<IEnumerable<LeaderBoardDto>> GetAllAsync()
-        {
-            var response = await _client.GetAsync("api/v1/Quiz/GetAllQuizzes");
-            response.EnsureSuccessStatusCode();
+        //quiz
+        public async Task<IEnumerable<QuizDto>> GetAllQuizzesAsync() { 
+             var response = await _client.GetAsync("api/v1/Quiz/GetAllQuizzes");
+        response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<IEnumerable<QuizDto>>();
-        }
-
-
+         }
+      
         public async Task<QuizDto> GetQuizByIdAsync(int id)
         {
             var response = await _client.GetAsync($"api/v1/Quiz/GetQuizById/{id}");
@@ -52,27 +49,10 @@ namespace GateWayService.Services
             var response = await _client.DeleteAsync($"api/v1/Quiz/Deleted/{id}");
             return response.IsSuccessStatusCode;
         }
-            var response = await _client.GetAsync("api/v1/Quiz/GetAllQuizzes");
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<IEnumerable<QuizDto>>();
-         }
-
-
-        public async Task<QuizDto> GetQuizByIdAsync(int id)
+        //Leaderbord
+           
+        public async Task<IEnumerable<LeaderBoardDto>> GetAllAsync()
         {
-            var response = await _client.GetAsync($"api/v1/Quiz/GetQuizById/{ id}");
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<QuizDto>();
-          
-        }
-
-        public async Task<QuizDto> CreateQuizAsync(QuizDto quiz)
-        {
-            var response = await _client.PostAsJsonAsync("api/v1/Quiz/CreatedQuiz",quiz);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<QuizDto>();
-     
-        }
             var leaderResponse = await  _client.GetAsync("api/v1/LeaderBoard");
             leaderResponse.EnsureSuccessStatusCode();
             return await leaderResponse.Content.ReadFromJsonAsync<IEnumerable<LeaderBoardDto>>();
@@ -144,17 +124,28 @@ namespace GateWayService.Services
         {
             var participantResponse = await _client.GetAsync($"api/v1/Participant/{id}");
             participantResponse.EnsureSuccessStatusCode();
-        public async Task<QuizDto> UpdateQuizAsync(int id, QuizDto quiz)
-        {
-            var response = await _client.PostAsJsonAsync($"api/v1/Quiz/UpdatedQuiz/{id}",quiz);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<QuizDto>();
+            return await participantResponse.Content.ReadFromJsonAsync<ParticipantDto>();
         }
 
-        public async Task<bool> DeleteQuizAsync(int id)
+        public async Task<ParticipantDto> CreateParticipants(ParticipantDto participant)
         {
-            var response =await _client.DeleteAsync($"api/v1/Quiz/Deleted/{id}");
-           return response.IsSuccessStatusCode;
+            var participantResponse = await _client.PostAsJsonAsync("api/v1/Participant", participant);
+            participantResponse.EnsureSuccessStatusCode();
+            return await participantResponse.Content.ReadFromJsonAsync<ParticipantDto>();
+        }
+        public async Task<ParticipantDto> UpdateParticipants(int id, ParticipantDto participant)
+        {
+            var participantResponse = await _client.PutAsJsonAsync($"api/v1/Participant/{id}", participant);
+            participantResponse.EnsureSuccessStatusCode();
+            return await participantResponse.Content.ReadFromJsonAsync<ParticipantDto>();
+        }
+        public async Task<bool> DeleteParticipants(int id)
+        {
+            var participantResponse = await _client.DeleteAsync($"api/v1/Participant/{id}");
+            return participantResponse.IsSuccessStatusCode;
+        }
+
+
         //questions
         public async Task<IEnumerable<QuestionsDto>> GetAllQuestionsAsync()
         {
@@ -174,7 +165,17 @@ namespace GateWayService.Services
             QuestionResponse.EnsureSuccessStatusCode();
             return await QuestionResponse.Content.ReadFromJsonAsync<QuestionsDto>();
         }
-
+        public async Task<QuestionsDto> UpdateQuestionAsync(int id, QuestionsDto question)
+        {
+            var QuestionResponse = await _client.PutAsJsonAsync($"api/v1/Question/{id}", question);
+            QuestionResponse.EnsureSuccessStatusCode();
+            return await QuestionResponse.Content.ReadFromJsonAsync<QuestionsDto>();
+        }
+        public async Task<bool> DeleteQuestionAsync(int questionId)
+        {
+            var QuestionResponse = await _client.DeleteAsync($"api/v1/Question/{questionId}");
+            return QuestionResponse.IsSuccessStatusCode;
+        }
         //response
         public async Task<IEnumerable<ResponseDto>> GetAllResponse()
         {
@@ -205,34 +206,8 @@ namespace GateWayService.Services
             var result = await _client.DeleteAsync($"api/v1/Response/{id}");
             return result.IsSuccessStatusCode;
         }
-        {
-            var QuestionResponse = await _client.PutAsJsonAsync($"api/v1/Question/{id}",question);
-            QuestionResponse.EnsureSuccessStatusCode();
-            return await QuestionResponse.Content.ReadFromJsonAsync<QuestionsDto>();
-        }
-        public async Task<bool> DeleteQuestionAsync(int questionId)
-        {
-            var QuestionResponse = await _client.DeleteAsync($"api/v1/Question/{questionId}");
-            return QuestionResponse.IsSuccessStatusCode;
-            return await participantResponse.Content.ReadFromJsonAsync<ParticipantDto> ();
-        }
-        public async Task<ParticipantDto> CreateParticipants(ParticipantDto participant)
-        {
-            var participantResponse = await _client.PostAsJsonAsync("api/v1/Participant",participant);
-            participantResponse.EnsureSuccessStatusCode();
-            return await participantResponse.Content.ReadFromJsonAsync<ParticipantDto>();
-        }
-        public async Task<ParticipantDto> UpdateParticipants(int id, ParticipantDto participant)
-        {
-            var participantResponse = await _client.PutAsJsonAsync($"api/v1/Participant/{id}",participant);
-            participantResponse.EnsureSuccessStatusCode();
-            return await participantResponse.Content.ReadFromJsonAsync<ParticipantDto>();
-        }
-        public async Task<bool> DeleteParticipants(int id)
-        {
-            var participantResponse = await _client.DeleteAsync($"api/v1/Participant/{id}");
-            return participantResponse.IsSuccessStatusCode;
-        }
+      
+     
 
 
 
