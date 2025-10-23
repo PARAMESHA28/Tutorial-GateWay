@@ -1,6 +1,7 @@
 ﻿using GateWayService.DTOs.Tutorial;
 using GateWayService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using System.Net.Http.Json;
 
 namespace GateWayService.Services
@@ -24,9 +25,9 @@ namespace GateWayService.Services
             return await response.Content.ReadFromJsonAsync<IEnumerable<CourseDto>>();
         }
 
-        public async Task<CourseDto> GetByIdAsync(int id)
+        public async Task<CourseDto> GetByIdAsync(int courseId)
         {
-            var response = await _client.GetAsync($"api/v1/Courses/{id}");
+            var response = await _client.GetAsync($"api/v1/Courses/{courseId}");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<CourseDto>();
         }
@@ -81,62 +82,34 @@ namespace GateWayService.Services
             var response = await _client.DeleteAsync($"api/v1/Courses/topics/{id}");
             return response.IsSuccessStatusCode;
         }
-        public async Task<IEnumerable<ContentDto>> GetAllContentsAsync()
+      
+        public async Task<IEnumerable<SubTopicDto>> GetAllSubTopicsByTopicIdAsync(int topicId)
         {
-            var response = await _client.GetAsync("api/v1/Content");
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<IEnumerable<ContentDto>>();
-        }
-        public async Task<ContentDto> GetContentByIdAsync(int id)
-        {
-            var response = await _client.GetAsync($"api/v1/Content/{id}");
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<ContentDto>();
-        }
-        public async Task<ContentDto> CreateContentAsync(ContentDto content)
-        {
-            var response = await _client.PostAsJsonAsync("api/v1/Content", content);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<ContentDto>();
-        }
-        public async Task<ContentDto> UpdateContentAsync(int id, ContentDto content)
-        {
-            var response = await _client.PutAsJsonAsync($"api/v1/Content/{id}", content);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<ContentDto>();
-        }
-        public async Task<bool> DeleteContentAsync(int id)
-        {
-            var response = await _client.DeleteAsync($"api/v1/Content/{id}");
-            return response.IsSuccessStatusCode;
-        }
-        public async Task<IEnumerable<SubTopicDto>> GetAllSubTopicsAsync()
-        {
-            var response = await _client.GetAsync("api/v1/SubTopics");
+            var response = await _client.GetAsync($"api/v1/Courses/topics/{topicId}/subtopics");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<IEnumerable<SubTopicDto>>();
         }
         public async Task<SubTopicDto> GetSubTopicByIdAsync(int id)
         {
-            var response = await _client.GetAsync($"api/v1/SubTopics/{id}");
+            var response = await _client.GetAsync($"api/v1/Courses/subtopics/{id}");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<SubTopicDto>();
         }
         public async Task<SubTopicDto> CreateSubTopicAsync(SubTopicDto subTopic)
         {
-            var response = await _client.PostAsJsonAsync("api/v1/SubTopics", subTopic);
+            var response = await _client.PostAsJsonAsync("api/v1/Courses/topics/subtopics", subTopic);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<SubTopicDto>();
         }
         public async Task<SubTopicDto> UpdateSubTopicAsync(int id, SubTopicDto subTopic)
         {
-            var response = await _client.PutAsJsonAsync($"api/v1/SubTopics/{id}", subTopic);
+            var response = await _client.PutAsJsonAsync($"api/v1/Courses/subtopics/{id}", subTopic);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<SubTopicDto>();
         }
         public async Task<bool> DeleteSubTopicAsync(int id)
         {
-            var response = await _client.DeleteAsync($"api/v1/SubTopics/{id}");
+            var response = await _client.DeleteAsync($"api/v1/Courses/subtopics/{id}");
             return response.IsSuccessStatusCode;
         }
     }

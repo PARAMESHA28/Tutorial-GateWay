@@ -18,15 +18,8 @@ namespace GateWayService.Services.Interfaces
         Task<TopicDto> UpdateTopicAsync(int id, TopicDto topic);
         Task<bool> DeleteTopicAsync(int id);
 
-        //Content
-        Task<IEnumerable<ContentDto>> GetAllContentsAsync();
-        Task<ContentDto> GetContentByIdAsync(int id);
-        Task<ContentDto> CreateContentAsync(ContentDto content);
-        Task<ContentDto> UpdateContentAsync(int id, ContentDto content);
-        Task<bool> DeleteContentAsync(int id);
-
         //SubTopic
-        Task<IEnumerable<SubTopicDto>> GetAllSubTopicsAsync();
+        Task<IEnumerable<SubTopicDto>> GetAllSubTopicsByTopicIdAsync(int topicId);
         Task<SubTopicDto> GetSubTopicByIdAsync(int id);
         Task<SubTopicDto> CreateSubTopicAsync(SubTopicDto subTopic);
         Task<SubTopicDto> UpdateSubTopicAsync(int id, SubTopicDto subTopic);

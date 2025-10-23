@@ -16,9 +16,9 @@ namespace GateWayService.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllSubTopics()
+        public async Task<IActionResult> GetAllSubTopicsByTopicId(int topicId)
         {
-            var subTopics = await _tutorialCommunicationService.GetAllSubTopicsAsync();
+            var subTopics = await _tutorialCommunicationService.GetAllSubTopicsByTopicIdAsync(topicId);
             return Ok(subTopics);
         }
 
